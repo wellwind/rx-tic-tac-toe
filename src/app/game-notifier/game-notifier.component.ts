@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs/Observable';
+import { GameCoreService } from './../game-core.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameNotifierComponent implements OnInit {
 
-  constructor() { }
+  round$: Observable<number>;
+
+  constructor(private gameCoreService: GameCoreService) { }
 
   ngOnInit() {
+    this.round$ = this.gameCoreService.getGameRound();
   }
 
 }

@@ -1,3 +1,4 @@
+import { GameCoreService } from './../game-core.service';
 import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/fromEvent';
@@ -11,14 +12,14 @@ export class GameBlockComponent implements OnInit {
 
   @Input() i;
   @Input() j;
-  constructor(private elementRef: ElementRef) { }
+  constructor(private elementRef: ElementRef, private gameCoreService: GameCoreService) { }
 
   ngOnInit() {
     Observable.fromEvent(this.elementRef.nativeElement, 'click').subscribe(() => this.flip());
   }
 
   flip() {
-    console.log(this.i, this.j);
+    this.gameCoreService.changeBlockState(this.i, this.j);
   }
 
 }

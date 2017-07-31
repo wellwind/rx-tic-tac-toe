@@ -1,3 +1,4 @@
+import { GameCoreService } from './game-core.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -16,7 +17,7 @@ import { GameNotifierComponent } from './game-notifier/game-notifier.component';
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [GameCoreService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
