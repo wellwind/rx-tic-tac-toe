@@ -1,0 +1,11 @@
+.game-block {
+  cursor: pointer;
+  border: 1px solid #000;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+}
+
+.game-block.flipped {
+  cursor: not-allowed;
+}

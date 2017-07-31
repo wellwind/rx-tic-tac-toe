@@ -1,0 +1,7 @@
+<table class="center">
+  <tr *ngFor="let i of [1, 2, 3]">
+    <td *ngFor="let j of [1, 2, 3]">
+      <app-game-block [i]="i" [j]="j"></app-game-block>
+    </td>
+    </tr>
+</table>
