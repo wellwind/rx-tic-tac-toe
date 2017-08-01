@@ -40,7 +40,7 @@ export class GameCoreService {
   }
 
   resetGame() {
-    this.round = 0;
+    this.round = 1;
   }
 
   getGameRound(): ReplaySubject<number> {
@@ -60,6 +60,6 @@ export class GameCoreService {
   }
 
   private notifyCurrentTurn() {
-    this.turnSubject.next(this.round % 2 === 0 ? 'O' : 'X');
+    this.turnSubject.next(this.round % 2 === 1 ? 'O' : 'X');
   }
 }
