@@ -5,19 +5,32 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
 @Injectable()
 export class GameCoreService {
 
-  private round = 1;
-  private roundSubject: ReplaySubject<number>;
+  private _round = 1;
+
+  public set round(round: number) {
+    this._round = round;
+    this.notifyCurrentRound();
+  }
+
+  public get round(): number {
+    return this._round;
+  }
+
+  private _roundSubject: ReplaySubject<number>;
+
+  private get roundSubject(): ReplaySubject<number> {
+    if (!this._roundSubject) {
+      this._roundSubject = new ReplaySubject(1);
+    }
+    return this._roundSubject;
+  }
 
   constructor() {
     this.resetGame();
   }
 
   resetGame() {
-    this.round = 1;
-    if (!this.roundSubject) {
-      this.roundSubject = new ReplaySubject(1);
-    }
-    this.notifyCurrentRound();
+    this.round = 0;
   }
 
   getGameRound() {
@@ -26,7 +39,6 @@ export class GameCoreService {
 
   changeBlockState(i, j) {
     ++this.round;
-    this.notifyCurrentRound();
   }
 
   private notifyCurrentRound() {
