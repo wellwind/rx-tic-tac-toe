@@ -10,6 +10,7 @@ export class GameCoreService {
   public set round(round: number) {
     this._round = round;
     this.notifyCurrentRound();
+    this.notifyCurrentTurn();
   }
 
   public get round(): number {
@@ -25,6 +26,15 @@ export class GameCoreService {
     return this._roundSubject;
   }
 
+  private _turnSubject: ReplaySubject<string>;
+
+  private get turnSubject(): ReplaySubject<string> {
+    if (!this._turnSubject) {
+      this._turnSubject = new ReplaySubject(1);
+    }
+    return this._turnSubject;
+  }
+
   constructor() {
     this.resetGame();
   }
@@ -33,8 +43,12 @@ export class GameCoreService {
     this.round = 0;
   }
 
-  getGameRound() {
+  getGameRound(): ReplaySubject<number> {
     return this.roundSubject;
+  }
+
+  getGameTurn(): ReplaySubject<string> {
+    return this.turnSubject;
   }
 
   changeBlockState(i, j) {
@@ -43,5 +57,9 @@ export class GameCoreService {
 
   private notifyCurrentRound() {
     this.roundSubject.next(this.round);
+  }
+
+  private notifyCurrentTurn() {
+    this.turnSubject.next(this.round % 2 === 0 ? 'O' : 'X');
   }
 }

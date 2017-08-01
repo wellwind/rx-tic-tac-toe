@@ -10,11 +10,13 @@ import { Component, OnInit } from '@angular/core';
 export class GameNotifierComponent implements OnInit {
 
   round$: Observable<number>;
+  turn$: Observable<string>;
 
   constructor(private gameCoreService: GameCoreService) { }
 
   ngOnInit() {
     this.round$ = this.gameCoreService.getGameRound();
+    this.turn$ = this.gameCoreService.getGameTurn();
   }
 
 }
